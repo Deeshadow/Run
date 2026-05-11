@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Server Public IP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f5f6fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2f3640;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.5em;
+      color: #40739e;
+    }
+
+    .loading {
+      color: #718093;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Server 2 - Public IP Address</h1>
+    <p id="ip" class="loading">Loading...</p>
+  </div>
+
+  <script>
+    fetch('https://api.ipify.org?format=text')
+      .then(response => response.text())
+      .then(ip => {
+        document.getElementById('ip').textContent = ip;
+        document.getElementById('ip').classList.remove('loading');
+      })
+      .catch(error => {
+        document.getElementById('ip').textContent = 'Error fetching IP';
+      });
+  </script>
+</body>
+</html>
+
+
+cat /var/www/html/index.html
+systemctl reload httpd
+systemctl restart httpd
